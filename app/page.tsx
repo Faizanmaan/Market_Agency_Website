@@ -58,7 +58,7 @@ export default async function HomePage() {
             <div className="text-lg mb-8 text-gray-text" style={{ fontFamily: 'Space Grotesk', fontSize: '20px' }}>
               <PrismicRichText field={page?.data.hero_description} />
             </div>
-            <button className="btn-primary h-[68px] w-[264px]">
+            <button className="btn-primary h-[68px] w-[264px] hover:border">
               <p style={{ fontFamily: 'Space Grotesk', fontSize: '20px' }}>{page?.data.hero_button_text}</p>
             </button>
           </div>
