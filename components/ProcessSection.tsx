@@ -3,15 +3,14 @@ import { useState } from 'react'
 
 export default function ProcessSection({ items }: { items: any[] }) {
     const [activeAccordion, setActiveAccordion] = useState<number | null>(0)
-    
+
     return (
         <div className="space-y-6">
             {items.map((item, index) => (
                 <div
                     key={index}
-                    className={`border-2 border-b-8 border-dark rounded-[45px] overflow-hidden transition-all ${
-                        activeAccordion === index ? 'bg-primary' : 'bg-gray-light'
-                    }`}
+                    className={`border-2 border-b-8 border-dark rounded-[45px] overflow-hidden transition-all ${activeAccordion === index ? 'bg-primary' : 'bg-gray-light'
+                        }`}
                 >
                     <button
                         onClick={() => setActiveAccordion(activeAccordion === index ? null : index)}
@@ -22,9 +21,8 @@ export default function ProcessSection({ items }: { items: any[] }) {
                             <h3 className="text-2xl font-semibold">{item.title}</h3>
                         </div>
                         <div
-                            className={`w-12 h-12 rounded-full border-2 border-dark flex items-center justify-center text-2xl ${
-                                activeAccordion === index ? 'bg-gray-light' : 'bg-gray-light'
-                            }`}
+                            className={`w-8 h-8 sm:w-12 sm:h-12 rounded-full border-2 border-dark flex items-center justify-center text-2xl ${activeAccordion === index ? 'bg-gray-light' : 'bg-gray-light'
+                                }`}
                         >
                             {activeAccordion === index ? '−' : '+'}
                         </div>

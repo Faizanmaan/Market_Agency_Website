@@ -44,10 +44,10 @@ export default async function PricingPage() {
             {/* Hero Section */}
             <section className="container mx-auto px-4 lg:px-8 py-16 lg:py-20">
                 <div className="max-w-3xl mx-auto text-center mb-12">
-                    <div className="text-2xl lg:text-4xl font-bold mb-6">
+                    <div className="text-3xl lg:text-4xl font-bold mb-6">
                         <PrismicRichText field={page?.data.hero_title} />
                     </div>
-                    <div className="text-base lg:text-xl text-gray-600 leading-relaxed">
+                    <div className="text-lg lg:text-xl text-gray-600 leading-relaxed">
                         <PrismicRichText field={page?.data.hero_description} />
                     </div>
                 </div>

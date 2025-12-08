@@ -34,7 +34,7 @@ export default async function BlogsPage() {
             {/* Hero Section */}
             <section className="container mx-auto px-4 lg:px-8 pb-8">
                 <div className="max-w-3xl mx-auto text-center my-20">
-                    <h1 className="text-2xl lg:text-4xl font-bold mb-6">Our Blog</h1>
+                    <h1 className="text-3xl lg:text-4xl font-bold mb-6">Our Blog</h1>
                     <p className="text-base lg:text-xl text-gray-600 leading-relaxed">
                         We use an agile approach to test assumptions and connect with the needs of your audience early and often.
                     </p>

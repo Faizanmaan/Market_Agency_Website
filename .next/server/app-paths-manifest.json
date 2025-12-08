@@ -1,3 +1,7 @@
 {
+  "/blogs/[uid]/page": "app/blogs/[uid]/page.js",
+  "/pricing/page": "app/pricing/page.js",
+  "/blogs/page": "app/blogs/page.js",
+  "/services/social-media-marketing/page": "app/services/social-media-marketing/page.js",
   "/page": "app/page.js"
 }

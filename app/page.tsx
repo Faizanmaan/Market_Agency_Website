@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import ProcessSection from '@/components/ProcessSection'
 import TestimonialsSection from '@/components/TestimonialsSection'
+import AnimatedLogos from '@/components/AnimatedLogos'
 
 export default async function HomePage() {
   const client = createClient()
@@ -75,19 +76,8 @@ export default async function HomePage() {
 
         {/* Client Logos */}
         {(page?.data as any).client_logos && (page?.data as any).client_logos.length > 0 && (
-          <div className="mt-16 pb-6">
-            <div className="flex flex-wrap justify-between items-center gap-8 grayscale opacity-60">
-              {(page?.data as any).client_logos.map((client: any, index: number) => (
-                client.logo?.url && (
-                  <PrismicNextImage
-                    key={index}
-                    field={client.logo}
-                    className="object-contain max-h-10"
-                    alt={client.client_name || 'Client logo'}
-                  />
-                )
-              ))}
-            </div>
+          <div className="mt-16">
+            <AnimatedLogos logos={(page?.data as any).client_logos} />
           </div>
         )}
       </section>
@@ -95,20 +85,20 @@ export default async function HomePage() {
       {/* Services Section */}
       <section id="services" className="container mx-auto px-4 lg:px-8 py-16">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-8 mb-12">
+        <div className="flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-8 mb-12">
           <div
             className="section-heading flex items-center justify-center"
             style={{ width: '178px', height: '51px', fontSize: '40px', fontFamily: 'Space Grotesk' }}
           >
             <PrismicRichText field={page?.data.services_title} />
           </div>
-          <div className="text-lg" style={{ fontFamily: 'Space Grotesk', fontSize: '18px' }}>
+          <div className="text-lg text-center md:text-left" style={{ fontFamily: 'Space Grotesk', fontSize: '18px' }}>
             <PrismicRichText field={page?.data.services_description} />
           </div>
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {services.map((service: any, index: number) => (
             <div
               key={index}
@@ -117,27 +107,27 @@ export default async function HomePage() {
           border-2 border-b-8 rounded-[45px] p-6 md:p-8 
           flex flex-col md:flex-row
           gap-6 md:gap-8
-          h-[310px] w-full md:w-[600px]
+          h-full w-full
           hover:shadow-lg transition-all overflow-hidden
         `}
             >
               {/* Left side: title + subtitle + button */}
               <div className="flex-1 flex flex-col justify-between h-full">
-                <div>
+                <div className="flex flex-col items-center md:items-start gap-1">
                   <h3
-                    className={`text-2xl lg:text-3xl font-semibold inline-block ${service.titleBgColor} px-2 py-1 rounded-lg`}
+                    className={`text-2xl xl:text-3xl font-semibold inline-block ${service.titleBgColor} px-2 py-1 rounded-lg`}
                   >
                     {service.title}
                   </h3>
                   {service.subtitle && (
-                    <h3 className={`text-2xl lg:text-3xl font-semibold inline-block ${service.titleBgColor} px-2 py-1 rounded-lg`}>{service.subtitle}</h3>
+                    <h3 className={`text-2xl xl:text-3xl font-semibold inline-block ${service.titleBgColor} px-2 py-1 rounded-lg`}>{service.subtitle}</h3>
                   )}
                 </div>
 
                 {/* Learn more button */}
                 <Link
                   href="/services/social-media-marketing"
-                  className={`flex items-center gap-3 ${service.buttonTextColor} rounded-full px-5 py-2.5 mt-auto`}
+                  className={`flex items-center gap-3 ${service.buttonTextColor} rounded-full py-2.5 mt-10 md:mt-auto justify-center md:justify-start`}
                 >
                   <span className="flex items-center justify-center w-9 h-9 bg-black text-dark rounded-full">
                     <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -150,7 +140,7 @@ export default async function HomePage() {
 
               {/* Right side: image - centered vertically */}
               {service.image && (
-                <div className="flex-1 flex items-center justify-end">
+                <div className="flex-1 flex items-center justify-center md:justify-end">
                   <PrismicNextImage
                     field={service.image}
                     className="object-contain w-36 h-36 md:w-44 md:h-44"
@@ -203,11 +193,11 @@ export default async function HomePage() {
 
       {/* Case Studies Section */}
       <section id="cases" className="container mx-auto px-4 lg:px-8 py-16">
-        <div className="flex items-center gap-8 mb-12">
+        <div className="flex flex-col md:flex-row items-center gap-8 mb-12">
           <div className="section-heading text-4xl lg:text-5xl" style={{ fontFamily: 'Space Grotesk', fontSize: '40px' }}>
             <PrismicRichText field={page?.data.case_studies_title} />
           </div>
-          <div className="text-lg" style={{ fontFamily: 'Space Grotesk', fontSize: '18px' }}>
+          <div className="text-lg text-center md:text-left" style={{ fontFamily: 'Space Grotesk', fontSize: '18px' }}>
             <PrismicRichText field={page?.data.case_studies_description} />
           </div>
         </div>
@@ -228,11 +218,11 @@ export default async function HomePage() {
 
       {/* Working Process Section */}
       <section className="container mx-auto px-4 lg:px-8 py-16">
-        <div className="flex items-center gap-8 mb-12">
-          <div className="section-heading text-4xl lg:text-5xl" style={{ fontFamily: 'Space Grotesk', fontSize: '40px' }}>
+        <div className="flex flex-col md:flex-row items-center md:items-start gap-8 mb-12">
+          <div className="section-heading text-4xl lg:text-5xl text-center md:text-left" style={{ fontFamily: 'Space Grotesk', fontSize: '40px' }}>
             <PrismicRichText field={page?.data.process_title} />
           </div>
-          <div className="text-lg" style={{ fontFamily: 'Space Grotesk', fontSize: '18px' }}>
+          <div className="text-lg text-center md:text-left" style={{ fontFamily: 'Space Grotesk', fontSize: '18px' }}>
             <PrismicRichText field={page?.data.process_description} />
           </div>
         </div>
@@ -242,11 +232,11 @@ export default async function HomePage() {
 
       {/* Team Section */}
       <section className="container mx-auto px-4 lg:px-8 py-16">
-        <div className="flex items-center gap-8 mb-12">
+        <div className="flex flex-col md:flex-row items-center md:items-start gap-8 mb-12">
           <div className="section-heading text-4xl lg:text-5xl">
             <PrismicRichText field={page?.data.team_title} />
           </div>
-          <div className="text-lg">
+          <div className="text-lg text-center md:text-left">
             <PrismicRichText field={page?.data.team_description} />
           </div>
         </div>
@@ -283,11 +273,11 @@ export default async function HomePage() {
 
       {/* Testimonials Section */}
       <section className="container mx-auto px-4 lg:px-8 py-16">
-        <div className="flex items-center gap-8 mb-12">
+        <div className="flex flex-col md:flex-row items-center md:items-start gap-8 mb-12">
           <div className="section-heading text-4xl lg:text-5xl">
             <PrismicRichText field={page?.data.testimonials_title} />
           </div>
-          <div className="text-lg">
+          <div className="text-lg text-center md:text-left">
             <PrismicRichText field={page?.data.testimonials_description} />
           </div>
         </div>
@@ -298,11 +288,11 @@ export default async function HomePage() {
 
       {/* Contact Section */}
       <section id="contact" className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="flex flex-col lg:flex-row lg:items-center lg:gap-8 mb-12">
+        <div className="flex flex-col md:flex-row items-center md:items-start gap-8 mb-12">
           <h2 className="section-heading text-3xl sm:text-4xl lg:text-5xl mb-4 lg:mb-0">
             Contact Us
           </h2>
-          <p className="text-base sm:text-lg">
+          <p className="text-base sm:text-lg text-center md:text-left">
             Connect with Us: Let's Discuss Your Digital Marketing Needs
           </p>
         </div>
