@@ -35,6 +35,13 @@
         ".next/types/**/*.ts"
     ],
     "exclude": [
-        "node_modules"
+        "node_modules",
+        "config",
+        "controllers",
+        "middleware",
+        "models",
+        "routes",
+        "utils",
+        "server.ts"
     ]
 }
