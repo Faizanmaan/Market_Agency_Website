@@ -1,10 +1,8 @@
 {
+  "/not-found": "app/not-found.js",
   "/services/social-media-marketing/page": "app/services/social-media-marketing/page.js",
   "/page": "app/page.js",
-  "/use-cases/page": "app/use-cases/page.js",
   "/about/page": "app/about/page.js",
-  "/services/page": "app/services/page.js",
-  "/pricing/page": "app/pricing/page.js",
-  "/blogs/page": "app/blogs/page.js",
-  "/blogs/[uid]/page": "app/blogs/[uid]/page.js"
+  "/use-cases/page": "app/use-cases/page.js",
+  "/services/page": "app/services/page.js"
 }

@@ -180,7 +180,7 @@ function ServiceCard({
                             <div className="mt-auto">
                                 <Link
                                     href="/services/social-media-marketing"
-                                    className={`flex items-center gap-3 ${service.buttonTextColor} rounded-full px-5 py-2.5`}
+                                    className={`flex items-center gap-3 ${service.buttonTextColor} rounded-full px-1 md:px-5 py-2.5`}
                                 >
                                     <span className="flex items-center justify-center w-9 h-9 bg-black text-dark rounded-full">
                                         <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
