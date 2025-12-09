@@ -1,8 +1,9 @@
 {
   "/not-found": "app/not-found.js",
-  "/services/social-media-marketing/page": "app/services/social-media-marketing/page.js",
   "/page": "app/page.js",
   "/about/page": "app/about/page.js",
+  "/services/social-media-marketing/page": "app/services/social-media-marketing/page.js",
   "/use-cases/page": "app/use-cases/page.js",
-  "/services/page": "app/services/page.js"
+  "/services/page": "app/services/page.js",
+  "/icon.png/route": "app/icon.png/route.js"
 }
