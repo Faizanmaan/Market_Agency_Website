@@ -218,7 +218,7 @@ export default async function HomePage() {
 
       {/* Working Process Section */}
       <section className="container mx-auto px-4 lg:px-8 py-16">
-        <div className="flex flex-col md:flex-row items-center md:items-start gap-8 mb-12">
+        <div className="flex flex-col md:flex-row items-center  gap-8 mb-12">
           <div className="section-heading text-4xl lg:text-5xl text-center md:text-left" style={{ fontFamily: 'Space Grotesk', fontSize: '40px' }}>
             <PrismicRichText field={page?.data.process_title} />
           </div>
@@ -232,7 +232,7 @@ export default async function HomePage() {
 
       {/* Team Section */}
       <section className="container mx-auto px-4 lg:px-8 py-16">
-        <div className="flex flex-col md:flex-row items-center md:items-start gap-8 mb-12">
+        <div className="flex flex-col md:flex-row items-center  gap-8 mb-12">
           <div className="section-heading text-4xl lg:text-5xl">
             <PrismicRichText field={page?.data.team_title} />
           </div>
@@ -273,7 +273,7 @@ export default async function HomePage() {
 
       {/* Testimonials Section */}
       <section className="container mx-auto px-4 lg:px-8 py-16">
-        <div className="flex flex-col md:flex-row items-center md:items-start gap-8 mb-12">
+        <div className="flex flex-col md:flex-row items-center  gap-8 mb-12">
           <div className="section-heading text-4xl lg:text-5xl">
             <PrismicRichText field={page?.data.testimonials_title} />
           </div>
@@ -288,7 +288,7 @@ export default async function HomePage() {
 
       {/* Contact Section */}
       <section id="contact" className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="flex flex-col md:flex-row items-center md:items-start gap-8 mb-12">
+        <div className="flex flex-col md:flex-row items-center  gap-8 mb-12">
           <h2 className="section-heading text-3xl sm:text-4xl lg:text-5xl mb-4 lg:mb-0">
             Contact Us
           </h2>

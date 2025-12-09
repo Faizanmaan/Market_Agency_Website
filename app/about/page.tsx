@@ -60,7 +60,7 @@ export default async function AboutPage() {
 
             {/* Team Section - From Homepage */}
             <section className="container mx-auto px-4 lg:px-8 py-16">
-                <div className="flex flex-col md:flex-row items-center md:items-start gap-8 mb-12">
+                <div className="flex flex-col md:flex-row items-center gap-8 mb-12">
                     <div className="section-heading text-4xl md:text-5xl">
                         <PrismicRichText field={page?.data.team_title} />
                     </div>
@@ -102,7 +102,7 @@ export default async function AboutPage() {
             {/* Services Section - From Homepage */}
             <section id="services" className="container mx-auto px-4 lg:px-8 py-16">
                 {/* Section Header */}
-                <div className="flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-8 mb-12">
+                <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8 mb-12">
                     <div
                         className="section-heading flex items-center justify-center"
                         style={{ width: '178px', height: '51px', fontSize: '40px', fontFamily: 'Space Grotesk' }}
