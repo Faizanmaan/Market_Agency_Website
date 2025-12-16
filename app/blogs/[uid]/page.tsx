@@ -11,7 +11,6 @@ interface BlogPostPageProps {
     }
 }
 
-// Generate metadata for SEO
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
     const client = createClient()
 
@@ -33,7 +32,6 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     }
 }
 
-// Generate static params for all blog posts
 export async function generateStaticParams() {
     const client = createClient()
 
@@ -50,7 +48,6 @@ export async function generateStaticParams() {
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
     const client = createClient()
 
-    // Fetch the blog post by UID
     let page
     try {
         page = await client.getByUID('blog_post', params.uid)
@@ -60,7 +57,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
     const data = page.data as any
 
-    // Format date
     const formatDate = (dateString: string | null) => {
         if (!dateString) return 'No date'
         const date = new Date(dateString)
@@ -73,7 +69,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
     return (
         <div className="min-h-screen bg-white mt-20">
-            {/* Back Navigation & Article Header */}
             <section className="container mx-auto px-4 lg:px-8 pt-12 pb-8">
                 <div className="max-w-6xl mx-auto">
                     <Link
@@ -109,7 +104,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 </div>
             </section>
 
-            {/* Hero Image */}
             {data.featured_image?.url && (
                 <section className="container mx-auto px-4 lg:px-8 pb-12">
                     <div className="max-w-6xl mx-auto">
@@ -127,7 +121,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 </section>
             )}
 
-            {/* Article Content */}
             <article className="container mx-auto px-4 lg:px-8 pb-16">
                 <div className="max-w-6xl mx-auto prose prose-lg">
                     <div className="blog-content">

@@ -24,7 +24,7 @@ export default function TestimonialsSection({ items }: TestimonialsSectionProps)
         setDirection('right')
         setIsAnimating(true)
         setCurrentTestimonial((prev) => (prev + 1) % items.length)
-        setTimeout(() => setIsAnimating(false), 500)
+        setTimeout(() => setIsAnimating(false), 800)
     }
 
     const prevTestimonial = () => {
@@ -32,7 +32,7 @@ export default function TestimonialsSection({ items }: TestimonialsSectionProps)
         setDirection('left')
         setIsAnimating(true)
         setCurrentTestimonial((prev) => (prev - 1 + items.length) % items.length)
-        setTimeout(() => setIsAnimating(false), 500)
+        setTimeout(() => setIsAnimating(false), 800)
     }
 
     const goToTestimonial = (index: number) => {
@@ -40,10 +40,8 @@ export default function TestimonialsSection({ items }: TestimonialsSectionProps)
         setDirection(index > currentTestimonial ? 'right' : 'left')
         setIsAnimating(true)
         setCurrentTestimonial(index)
-        setTimeout(() => setIsAnimating(false), 500)
+        setTimeout(() => setIsAnimating(false), 800)
     }
-
-    // Handle touch gestures
     const handleTouchStart = (e: React.TouchEvent) => {
         touchStartX.current = e.touches[0].clientX
     }
@@ -56,24 +54,19 @@ export default function TestimonialsSection({ items }: TestimonialsSectionProps)
         if (!touchStartX.current || !touchEndX.current) return
 
         const distance = touchStartX.current - touchEndX.current
-        const minSwipeDistance = 50 // minimum distance for a swipe
+        const minSwipeDistance = 50
 
         if (Math.abs(distance) > minSwipeDistance) {
             if (distance > 0) {
-                // Swiped left - go to next
                 nextTestimonial()
             } else {
-                // Swiped right - go to previous
                 prevTestimonial()
             }
         }
 
-        // Reset values
         touchStartX.current = 0
         touchEndX.current = 0
     }
-
-    // Handle mouse drag gestures (for desktop)
     const handleMouseDown = (e: React.MouseEvent) => {
         touchStartX.current = e.clientX
     }
@@ -112,39 +105,46 @@ export default function TestimonialsSection({ items }: TestimonialsSectionProps)
 
     if (items.length === 0) return null
 
-    const getAnimationClass = (offset: number) => {
-        if (!isAnimating) {
-            if (offset === 0) return 'opacity-100 scale-100 z-10'
-            return 'opacity-40 scale-95 z-0'
-        }
+    const getPositionClass = (i: number) => {
+        const offset = (i - currentTestimonial + items.length) % items.length
 
+        const baseClasses = 'absolute top-0 flex flex-col w-[350px] lg:w-[600px] transition-all duration-700 ease-in-out'
+        if (items.length <= 3) {
+            if (offset === 0) {
+                return `${baseClasses} left-1/2 -translate-x-1/2 opacity-100 scale-100 z-30`
+            }
+            else if (offset === 1) {
+                return `${baseClasses} left-1/2 translate-x-[50%] opacity-60 scale-90 z-20`
+            }
+            else if (offset === items.length - 1) {
+                return `${baseClasses} left-1/2 -translate-x-[150%] opacity-60 scale-90 z-20`
+            }
+        }
         if (offset === 0) {
-            return direction === 'right'
-                ? 'animate-slide-in-right opacity-100 scale-100 z-10'
-                : 'animate-slide-in-left opacity-100 scale-100 z-10'
+            return `${baseClasses} left-1/2 -translate-x-1/2 opacity-100 scale-100 z-30`
         }
-
-        if (offset === -1) {
-            return direction === 'right'
-                ? 'animate-slide-out-left opacity-0 scale-90 z-0'
-                : 'opacity-40 scale-95 z-0'
+        else if (offset === 1) {
+            return `${baseClasses} left-1/2 translate-x-[45%] opacity-60 scale-90 z-20`
         }
-
-        if (offset === 1) {
-            return direction === 'left'
-                ? 'animate-slide-out-right opacity-0 scale-90 z-0'
-                : 'opacity-40 scale-95 z-0'
+        else if (offset === 2) {
+            return `${baseClasses} left-1/2 translate-x-[90%] opacity-30 scale-80 z-10`
         }
-
-        return 'opacity-40 scale-95 z-0'
+        else if (offset === items.length - 1) {
+            return `${baseClasses} left-1/2 -translate-x-[145%] opacity-60 scale-90 z-20`
+        }
+        else if (offset === items.length - 2) {
+            return `${baseClasses} left-1/2 -translate-x-[190%] opacity-30 scale-80 z-10`
+        }
+        else {
+            return `${baseClasses} opacity-0 scale-75 pointer-events-none z-0`
+        }
     }
 
     return (
-        <div className="bg-dark rounded-[45px] pt-12 pb-12 text-white overflow-hidden">
-            {/* Testimonial Cards Carousel */}
+        <div className="bg-dark rounded-[45px] pt-20 pb-20 text-white overflow-hidden">
             <div
                 ref={containerRef}
-                className="relative flex justify-center items-start gap-8 mb-12 min-h-[400px] cursor-grab active:cursor-grabbing select-none"
+                className="relative w-full min-h-[400px] cursor-grab active:cursor-grabbing select-none"
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}
                 onTouchEnd={handleTouchEnd}
@@ -153,34 +153,24 @@ export default function TestimonialsSection({ items }: TestimonialsSectionProps)
                 onMouseUp={handleMouseUp}
                 onMouseLeave={handleMouseLeave}
             >
-                {[-1, 0, 1].map((offset) => {
-                    const index = (currentTestimonial + offset + items.length) % items.length;
-                    const testimonial = items[index];
-                    return (
-                        <div
-                            key={`${index}-${currentTestimonial}`}
-                            className={`flex flex-col flex-shrink-0 w-[350px] lg:w-[600px] transition-all duration-500 ease-in-out ${getAnimationClass(offset)}`}
-                        >
-                            {/* Speech Bubble Card */}
-                            <div className="bg-dark border border-primary rounded-[45px] p-12 relative mb-8 h-full pointer-events-none">
-                                <div className="text-base leading-relaxed text-white">{testimonial.quote}</div>
-                                {/* Speech bubble tail - seamless outline */}
-                                <div className="absolute -bottom-[1px] left-10 w-8 h-8 bg-dark border-b border-r border-primary transform rotate-45 translate-y-1/2"></div>
-                            </div>
-                            {/* Author Info */}
-                            <div className="pl-10 pointer-events-none">
-                                <p className="font-semibold text-primary text-lg">{testimonial.author}</p>
-                                <p className="text-sm text-white">{testimonial.position}</p>
-                            </div>
+                {items.map((testimonial, i) => (
+                    <div
+                        key={i}
+                        className={getPositionClass(i)}
+                    >
+                        <div className="bg-dark border border-primary rounded-[45px] p-12 relative mb-8 h-full pointer-events-none">
+                            <div className="text-lg leading-6 text-white">{testimonial.quote}</div>
+                            <div className="absolute -bottom-[1px] left-[50px] w-8 h-8 bg-dark border-b border-r border-primary transform rotate-45 translate-y-1/2"></div>
                         </div>
-                    );
-                })}
+                        <div className="pl-10 pointer-events-none">
+                            <p className="text-primary text-xl font-medium">{testimonial.author}</p>
+                            <p className="text-lg text-white font-normal">{testimonial.position}</p>
+                        </div>
+                    </div>
+                ))}
             </div>
-
-            {/* Navigation Controls - Centered at Bottom */}
             <div className="flex justify-between items-center mt-2 px-4">
                 <div className="flex items-center gap-12 mx-auto">
-                    {/* Previous Arrow */}
                     <button
                         onClick={prevTestimonial}
                         disabled={isAnimating}
@@ -192,9 +182,7 @@ export default function TestimonialsSection({ items }: TestimonialsSectionProps)
                             <path d="M9 19L2 12L9 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                     </button>
-
-                    {/* Navigation Dots - Stars */}
-                    <div className="flex gap-4">
+                    <div className="flex gap-4 mx-24">
                         {items.map((_, index) => (
                             <button
                                 key={index}
@@ -204,15 +192,12 @@ export default function TestimonialsSection({ items }: TestimonialsSectionProps)
                                     }`}
                                 aria-label={`Go to testimonial ${index + 1}`}
                             >
-                                {/* 5-pointed star SVG */}
                                 <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M7 0L8.5716 4.83688H13.6574L9.5429 7.82624L11.1145 12.6631L7 9.67376L2.8855 12.6631L4.4571 7.82624L0.342604 4.83688H5.4284L7 0Z" />
                                 </svg>
                             </button>
                         ))}
                     </div>
-
-                    {/* Next Arrow */}
                     <button
                         onClick={nextTestimonial}
                         disabled={isAnimating}

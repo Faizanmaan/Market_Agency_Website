@@ -25,7 +25,6 @@ export default function BlogCard({
             className="bg-white border-2 border-dark rounded-[45px] p-6 transition-all flex flex-col h-full"
             style={{ boxShadow: '0px 8px 0px 0px rgba(0, 0, 0, 1)' }}
         >
-            {/* Header: Badge and Date */}
             <div className="flex items-center justify-between mb-4">
                 {badgeType && (
                     <span className="inline-flex items-center gap-1 bg-primary text-dark px-2 py-1 rounded text-xs font-semibold">
@@ -46,25 +45,22 @@ export default function BlogCard({
                         {badgeType}
                     </span>
                 )}
-                <span className="text-sm text-gray-text ml-auto">{date}</span>
+                <span className="text-sm ml-auto">{date}</span>
             </div>
 
-            {/* Title */}
             <h3 className="text-2xl font-bold mb-3 line-clamp-2">{title}</h3>
 
-            {/* Excerpt */}
-            <p className="text-base text-gray-text mb-6 line-clamp-3 flex-grow">{excerpt}</p>
+            <p className="text-base font-light mb-6 line-clamp-3 flex-grow">{excerpt}</p>
 
-            {/* Footer: Author and Read More */}
             <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full overflow-hidden bg-gray-100 flex-shrink-0">
+                    <div className="w-7 h-7 rounded-full overflow-hidden bg-gray-100 flex-shrink-0">
                         {authorAvatar ? (
                             <Image
                                 src={authorAvatar}
                                 alt={author}
-                                width={32}
-                                height={32}
+                                width={28}
+                                height={28}
                                 className="w-full h-full object-cover"
                             />
                         ) : (
@@ -73,7 +69,7 @@ export default function BlogCard({
                             </div>
                         )}
                     </div>
-                    <span className="text-sm font-medium">{author}</span>
+                    <span className="text-base font-medium">{author}</span>
                 </div>
                 <Link
                     href={`/blogs/${slug}`}

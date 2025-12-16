@@ -17,32 +17,28 @@ export default function PricingCard({
 }: PricingCardProps) {
     return (
         <div
-            className="bg-white border border-dark rounded-[45px] p-6 transition-all flex flex-col"
+            className="bg-white border border-black rounded-[45px] p-6 transition-all flex flex-col"
             style={{ boxShadow: '0px 8px 0px 0px rgba(0, 0, 0, 1)' }}
         >
-            {/* Tier Name */}
             <div className="flex justify-center">
                 <h3 className="text-2xl font-bold mb-3">{tier}</h3>
             </div>
             <div className="flex items-center mx-auto">
-                {/* Description */}
-                <p className="text-lg text-gray-text mb-6 min-h-[3rem] text-center">{description}</p>
+                <p className="text-lg font-light mb-6 min-h-[3rem] text-center">{description}</p>
             </div>
             <div className="flex justify-center">
-                {/* Price */}
                 <div className="mb-8">
                     <div className="flex items-baseline gap-1">
                         <span className="text-5xl font-bold">${price}</span>
-                        <span className="text-base text-gray-text">/month</span>
+                        <span className="text-base">/month</span>
                     </div>
                 </div>
             </div>
-            {/* Features List */}
             <ul className="space-y-3 mb-8 flex-grow">
                 {features.map((feature, index) => (
                     <li key={index} className="flex items-start gap-3">
                         <svg
-                            className="w-5 h-5 text-primary flex-shrink-0 mt-0.5"
+                            className="w-5 h-5 text-black flex-shrink-0 mt-0.5"
                             fill="currentColor"
                             viewBox="0 0 20 20"
                         >
@@ -56,9 +52,7 @@ export default function PricingCard({
                     </li>
                 ))}
             </ul>
-
-            {/* CTA Button */}
-            <button className="w-full bg-primary text-dark font-semibold py-3 px-4 text-sm rounded-xl hover:bg-dark hover:text-white transition-all">
+            <button className="w-full bg-primary text-dark text-sm font-medium py-3 px-4 rounded-lg hover:bg-dark hover:text-white transition-all">
                 Get Started
             </button>
         </div>

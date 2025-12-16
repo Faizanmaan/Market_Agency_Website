@@ -19,7 +19,6 @@ export default function Header() {
         <header className="bg-white sticky top-0 z-50">
             <div className="container max-w-7xl mx-auto px-4 lg:px-8">
                 <div className="flex items-center justify-between h-20">
-                    {/* Logo */}
                     <Link href="/" className="flex items-center gap-2">
                         <Image
                             src="/positivus-logo.png"
@@ -30,7 +29,6 @@ export default function Header() {
                         />
                     </Link>
 
-                    {/* Desktop Navigation */}
                     <nav className="hidden lg:flex items-center gap-8">
                         {navLinks.map((link) => (
                             <Link
@@ -51,7 +49,6 @@ export default function Header() {
                         </Link>
                     </nav>
 
-                    {/* Mobile Menu Button */}
                     <button
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                         className="lg:hidden flex flex-col gap-1.5"
@@ -63,7 +60,6 @@ export default function Header() {
                     </button>
                 </div>
 
-                {/* Mobile Menu */}
                 {mobileMenuOpen && (
                     <div className="lg:hidden py-4 border-t border-gray-200">
                         <nav className="flex flex-col gap-4">

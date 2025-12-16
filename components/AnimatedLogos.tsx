@@ -15,7 +15,6 @@ interface AnimatedLogosProps {
 export default function AnimatedLogos({ logos }: AnimatedLogosProps) {
     if (logos.length === 0) return null
 
-    // Triple the logos for smooth infinite scroll
     const tripleLogos = [...logos, ...logos, ...logos]
 
     return (
@@ -40,7 +39,7 @@ export default function AnimatedLogos({ logos }: AnimatedLogosProps) {
                     animation-play-state: paused;
                 }
             `}</style>
-            <div className="scroll-container gap-12 items-center">
+            <div className="scroll-container gap-6 items-center">
                 {tripleLogos.map((client: Logo, index: number) =>
                     client.logo?.url ? (
                         <div
@@ -49,7 +48,7 @@ export default function AnimatedLogos({ logos }: AnimatedLogosProps) {
                         >
                             <PrismicNextImage
                                 field={client.logo}
-                                className="object-contain max-h-[40px] cursor-pointer"
+                                className="object-contain w-full h-[48px] cursor-pointer"
                             />
                         </div>
                     ) : null

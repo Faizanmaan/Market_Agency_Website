@@ -1,7 +1,6 @@
 export default function CaseStudyPage({ params }: { params: { uid: string } }) {
     return (
         <div className="min-h-screen bg-white">
-            {/* Hero Section */}
             <section className="container mx-auto px-4 lg:px-8 py-16 lg:py-20">
                 <div className="max-w-3xl mx-auto text-center">
                     <h1 className="text-4xl lg:text-5xl font-bold mb-6 capitalize">
@@ -13,7 +12,6 @@ export default function CaseStudyPage({ params }: { params: { uid: string } }) {
                 </div>
             </section>
 
-            {/* Content Section */}
             <section className="container mx-auto px-4 lg:px-8 pb-20">
                 <div className="max-w-4xl mx-auto">
                     <div className="prose prose-lg max-w-none">

@@ -6,21 +6,14 @@ export default async function PricingPage() {
     const client = createClient()
     const page = await client.getSingle('pricing').catch(() => null)
 
-    // Map Prismic data to pricing tiers format
     const pricingTiers = page?.data.pricing_tiers?.map((tier: any) => {
-        // Extract features from Rich Text field
         const features: string[] = []
-
-        // Debug: log the features data structure
         console.log('Tier features:', JSON.stringify(tier.features, null, 2))
 
         if (tier.features && Array.isArray(tier.features)) {
-            // Parse Rich Text blocks to extract text from paragraphs or list items
             tier.features.forEach((block: any) => {
                 console.log('Block type:', block.type, 'Block text:', block.text)
-                // Accept paragraphs, list items, or ordered list items
                 if (block.type === 'paragraph' || block.type === 'list-item' || block.type === 'o-list-item') {
-                    // Only add non-empty text
                     if (block.text && block.text.trim().length > 0) {
                         features.push(block.text)
                     }
@@ -41,19 +34,16 @@ export default async function PricingPage() {
 
     return (
         <div className="container max-w-7xl mx-auto">
-            {/* Hero Section */}
             <section className="container mx-auto px-4 lg:px-8 py-16 lg:py-20">
                 <div className="max-w-3xl mx-auto text-center mb-12">
                     <div className="text-3xl lg:text-4xl font-bold mb-6">
                         <PrismicRichText field={page?.data.hero_title} />
                     </div>
-                    <div className="text-lg lg:text-xl text-gray-600 leading-relaxed">
+                    <div className="text-lg lg:text-xl font-light leading-relaxed">
                         <PrismicRichText field={page?.data.hero_description} />
                     </div>
                 </div>
             </section>
-
-            {/* Pricing Tiers Grid */}
             <section className="container mx-auto px-4 lg:px-8 pb-16">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {pricingTiers.map((tier, index) => (

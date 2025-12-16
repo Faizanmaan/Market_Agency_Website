@@ -13,7 +13,6 @@ export default function DiagonalPattern({ variant = 'light', className = '' }: D
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
         >
-            {/* Create a 3x3 grid of diagonal lines */}
             {[0, 1, 2].map((row) =>
                 [0, 1, 2].map((col) => (
                     <line
