@@ -1,90 +1,97 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
 import { useState } from 'react'
+import { PrismicNextImage } from '@prismicio/next'
+import { PrismicLink } from '@prismicio/react'
+import { SettingsDocument } from '@/prismicio-types'
 
-export default function Header() {
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-
-    const navLinks = [
-        { href: '/about', label: 'About us' },
-        { href: '/services', label: 'Services' },
-        { href: '/use-cases', label: 'Use Cases' },
-        { href: '/pricing', label: 'Pricing' },
-        { href: '/blogs', label: 'Blog' },
-    ]
-
-    return (
-        <header className="bg-white sticky top-0 z-50">
-            <div className="container max-w-7xl mx-auto px-4 lg:px-8">
-                <div className="flex items-center justify-between h-20">
-                    <Link href="/" className="flex items-center gap-2">
-                        <Image
-                            src="/positivus-logo.png"
-                            alt="Positivus Logo"
-                            width={229}
-                            height={36}
-                            className="h-9 w-auto"
-                        />
-                    </Link>
-
-                    <nav className="hidden lg:flex items-center gap-8">
-                        {navLinks.map((link) => (
-                            <Link
-                                key={link.href}
-                                href={link.href}
-                                className="text-dark hover:text-gray-600 transition-colors"
-                                style={{ fontFamily: 'Space Grotesk', fontSize: '20px' }}
-                            >
-                                {link.label}
-                            </Link>
-                        ))}
-                        <Link
-                            href="#contact"
-                            className="border border-dark px-6 py-3 rounded-lg inline-block hover:bg-black hover:text-white transition-color"
-                            style={{ fontFamily: 'Space Grotesk', fontSize: '20px' }}
-                        >
-                            Request a quote
-                        </Link>
-                    </nav>
-
-                    <button
-                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                        className="lg:hidden flex flex-col gap-1.5"
-                        aria-label="Toggle menu"
-                    >
-                        <span className="w-6 h-0.5 bg-dark transition-all"></span>
-                        <span className="w-6 h-0.5 bg-dark transition-all"></span>
-                        <span className="w-6 h-0.5 bg-dark transition-all"></span>
-                    </button>
-                </div>
-
-                {mobileMenuOpen && (
-                    <div className="lg:hidden py-4 border-t border-gray-200">
-                        <nav className="flex flex-col gap-4">
-                            {navLinks.map((link) => (
-                                <Link
-                                    key={link.href}
-                                    href={link.href}
-                                    className="text-dark hover:text-gray-600 transition-colors"
-                                    onClick={() => setMobileMenuOpen(false)}
-                                >
-                                    {link.label}
-                                </Link>
-                            ))}
-                            <Link
-                                href="#contact"
-                                className="btn-secondary text-center"
-                                onClick={() => setMobileMenuOpen(false)}
-                            >
-                                Request a quote
-                            </Link>
-                        </nav>
-                    </div>
-                )}
-            </div>
-        </header>
-    )
+interface HeaderProps {
+  settings: SettingsDocument | null
 }
 
+export default function Header({ settings }: HeaderProps) {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
+  const navLinks = settings?.data.nav_links || []
+
+  return (
+    <header className="sticky top-0 z-50 bg-white">
+      <div className="container mx-auto max-w-7xl px-4 lg:px-8">
+        <div className="flex h-20 items-center justify-between">
+          <Link href="/" className="flex items-center gap-2">
+            {settings?.data.header_logo.url ? (
+              <PrismicNextImage
+                field={settings.data.header_logo}
+                className="h-9 w-auto"
+                width={229}
+                height={36}
+                priority
+              />
+            ) : (
+              <span className="text-2xl font-bold">Positivus</span>
+            )}
+          </Link>
+
+          <nav className="hidden items-center gap-8 lg:flex">
+            {navLinks.map((item, index) => (
+              <PrismicLink
+                key={index}
+                field={item.link}
+                className="text-dark transition-colors hover:text-gray-600"
+                style={{ fontFamily: 'Space Grotesk', fontSize: '20px' }}
+              >
+                {item.label}
+              </PrismicLink>
+            ))}
+            {settings?.data.cta_text && (
+              <PrismicLink
+                field={settings.data.cta_link}
+                className="transition-color inline-block rounded-lg border border-dark px-6 py-3 hover:bg-black hover:text-white"
+                style={{ fontFamily: 'Space Grotesk', fontSize: '20px' }}
+              >
+                {settings.data.cta_text}
+              </PrismicLink>
+            )}
+          </nav>
+
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="flex flex-col gap-1.5 lg:hidden"
+            aria-label="Toggle menu"
+          >
+            <span className="h-0.5 w-6 bg-dark transition-all"></span>
+            <span className="h-0.5 w-6 bg-dark transition-all"></span>
+            <span className="h-0.5 w-6 bg-dark transition-all"></span>
+          </button>
+        </div>
+
+        {mobileMenuOpen && (
+          <div className="border-t border-gray-200 py-4 lg:hidden">
+            <nav className="flex flex-col gap-4">
+              {navLinks.map((item, index) => (
+                <PrismicLink
+                  key={index}
+                  field={item.link}
+                  className="text-dark transition-colors hover:text-gray-600"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {item.label}
+                </PrismicLink>
+              ))}
+              {settings?.data.cta_text && (
+                <PrismicLink
+                  field={settings.data.cta_link}
+                  className="btn-secondary text-center"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {settings.data.cta_text}
+                </PrismicLink>
+              )}
+            </nav>
+          </div>
+        )}
+      </div>
+    </header>
+  )
+}

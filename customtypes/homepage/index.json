@@ -144,6 +144,20 @@
                 "allowTargetBlank": true,
                 "multi": "paragraph"
               }
+            },
+            "link": {
+              "type": "Link",
+              "config": {
+                "label": "Link",
+                "placeholder": "Learn more link..."
+              }
+            },
+            "link_label": {
+              "type": "Text",
+              "config": {
+                "label": "Link Label",
+                "placeholder": "Learn more"
+              }
             }
           }
         }

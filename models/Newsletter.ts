@@ -1,10 +1,10 @@
-import mongoose, { Document, Schema } from 'mongoose';
+import mongoose, { Document, Schema } from 'mongoose'
 
 export interface INewsletter extends Document {
-  email: string;
-  status: 'active' | 'unsubscribed';
-  subscribedAt: Date;
-  unsubscribedAt?: Date;
+  email: string
+  status: 'active' | 'unsubscribed'
+  subscribedAt: Date
+  unsubscribedAt?: Date
 }
 
 const newsletterSchema = new Schema<INewsletter>({
@@ -16,21 +16,21 @@ const newsletterSchema = new Schema<INewsletter>({
     lowercase: true,
     match: [
       /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-      'Please provide a valid email'
-    ]
+      'Please provide a valid email',
+    ],
   },
   status: {
     type: String,
     enum: ['active', 'unsubscribed'],
-    default: 'active'
+    default: 'active',
   },
   subscribedAt: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
   unsubscribedAt: {
-    type: Date
-  }
-});
+    type: Date,
+  },
+})
 
-export default mongoose.model<INewsletter>('Newsletter', newsletterSchema);
+export default mongoose.model<INewsletter>('Newsletter', newsletterSchema)

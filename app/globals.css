@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,21 +6,21 @@
 
 @layer base {
   body {
-    @apply bg-white text-dark font-sans;
+    @apply bg-white font-sans text-dark;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-dark text-white px-8 py-4 rounded-xl font-normal hover:bg-white hover:text-black hover:border-black transition-all;
+    @apply rounded-xl bg-dark px-8 py-4 font-normal text-white transition-all hover:border-black hover:bg-white hover:text-black;
   }
 
   .btn-secondary {
-    @apply bg-primary text-dark px-8 py-4 rounded-xl font-medium hover:bg-primary/90 transition-all;
+    @apply rounded-xl bg-primary px-8 py-4 font-medium text-dark transition-all hover:bg-primary/90;
   }
 
   .section-heading {
-    @apply bg-primary text-dark px-2 py-1 rounded-md inline-block font-medium text-sm md:text-base;
+    @apply inline-block rounded-md bg-primary px-2 py-1 text-sm font-medium text-dark md:text-base;
   }
 
   .section-heading h1,

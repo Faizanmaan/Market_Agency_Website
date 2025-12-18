@@ -1,5 +1,5 @@
-import nodemailer from 'nodemailer';
-import { IContact } from '../models/Contact';
+import nodemailer from 'nodemailer'
+import { IContact } from '../models/Contact'
 
 // Create reusable transporter
 const createTransporter = () => {
@@ -11,12 +11,12 @@ const createTransporter = () => {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASS,
     },
-  });
-};
+  })
+}
 
 // Send contact form notification email
 export const sendContactEmail = async (contact: IContact): Promise<void> => {
-  const transporter = createTransporter();
+  const transporter = createTransporter()
 
   const mailOptions = {
     from: `"${process.env.FROM_NAME}" <${process.env.FROM_EMAIL}>`,
@@ -33,14 +33,14 @@ export const sendContactEmail = async (contact: IContact): Promise<void> => {
       <hr>
       <p><small>Submitted at: ${new Date(contact.createdAt).toLocaleString()}</small></p>
     `,
-  };
+  }
 
-  await transporter.sendMail(mailOptions);
-};
+  await transporter.sendMail(mailOptions)
+}
 
 // Send welcome email to newsletter subscriber
 export const sendWelcomeEmail = async (email: string): Promise<void> => {
-  const transporter = createTransporter();
+  const transporter = createTransporter()
 
   const mailOptions = {
     from: `"${process.env.FROM_NAME}" <${process.env.FROM_EMAIL}>`,
@@ -53,7 +53,7 @@ export const sendWelcomeEmail = async (email: string): Promise<void> => {
       <br>
       <p>Best regards,<br>The Team</p>
     `,
-  };
+  }
 
-  await transporter.sendMail(mailOptions);
-};
+  await transporter.sendMail(mailOptions)
+}

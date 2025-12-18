@@ -1,13 +1,13 @@
-import mongoose, { Document, Schema } from 'mongoose';
+import mongoose, { Document, Schema } from 'mongoose'
 
 export interface IContact extends Document {
-  name: string;
-  email: string;
-  phone?: string;
-  company?: string;
-  message: string;
-  status: 'new' | 'contacted' | 'closed';
-  createdAt: Date;
+  name: string
+  email: string
+  phone?: string
+  company?: string
+  message: string
+  status: 'new' | 'contacted' | 'closed'
+  createdAt: Date
 }
 
 const contactSchema = new Schema<IContact>({
@@ -15,7 +15,7 @@ const contactSchema = new Schema<IContact>({
     type: String,
     required: [true, 'Please provide your name'],
     trim: true,
-    maxlength: [100, 'Name cannot be more than 100 characters']
+    maxlength: [100, 'Name cannot be more than 100 characters'],
   },
   email: {
     type: String,
@@ -24,31 +24,31 @@ const contactSchema = new Schema<IContact>({
     lowercase: true,
     match: [
       /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-      'Please provide a valid email'
-    ]
+      'Please provide a valid email',
+    ],
   },
   phone: {
     type: String,
-    trim: true
+    trim: true,
   },
   company: {
     type: String,
-    trim: true
+    trim: true,
   },
   message: {
     type: String,
     required: [true, 'Please provide a message'],
-    maxlength: [1000, 'Message cannot be more than 1000 characters']
+    maxlength: [1000, 'Message cannot be more than 1000 characters'],
   },
   status: {
     type: String,
     enum: ['new', 'contacted', 'closed'],
-    default: 'new'
+    default: 'new',
   },
   createdAt: {
     type: Date,
-    default: Date.now
-  }
-});
+    default: Date.now,
+  },
+})
 
-export default mongoose.model<IContact>('Contact', contactSchema);
+export default mongoose.model<IContact>('Contact', contactSchema)
