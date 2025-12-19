@@ -6,6 +6,8 @@ interface PricingCardProps {
   price: number
   features: string[]
   isPopular?: boolean
+  priceSuffix?: string | null
+  buttonText?: string | null
 }
 
 export default function PricingCard({
@@ -14,6 +16,8 @@ export default function PricingCard({
   price,
   features,
   isPopular = false,
+  priceSuffix,
+  buttonText,
 }: PricingCardProps) {
   return (
     <div
@@ -32,7 +36,7 @@ export default function PricingCard({
         <div className="mb-8">
           <div className="flex items-baseline gap-1">
             <span className="text-5xl font-bold">${price}</span>
-            <span className="text-base">/month</span>
+            <span className="text-base">{priceSuffix || '/month'}</span>
           </div>
         </div>
       </div>
@@ -55,7 +59,7 @@ export default function PricingCard({
         ))}
       </ul>
       <button className="w-full rounded-lg bg-primary px-4 py-3 text-sm font-medium text-dark transition-all hover:bg-dark hover:text-white">
-        Get Started
+        {buttonText || 'Get Started'}
       </button>
     </div>
   )

@@ -13,7 +13,7 @@ export default async function HomePage() {
   const page = await client.getSingle('homepage').catch(() => null)
 
   const services =
-    page?.data.services.map((item) => {
+    page?.data?.services?.map((item) => {
       const bgColor = item.background_color || 'bg-gray-light'
 
       const isDarkBg =
@@ -32,14 +32,14 @@ export default async function HomePage() {
     }) || []
 
   const workingProcess =
-    page?.data.process_steps.map((item) => ({
+    page?.data?.process_steps?.map((item) => ({
       number: item.number || '',
       title: item.title || '',
       description: <PrismicRichText field={item.description} />,
     })) || []
 
   const team =
-    page?.data.team_members.map((item) => ({
+    page?.data?.team_members?.map((item) => ({
       name: item.name || '',
       role: item.role || '',
       experience: item.experience || '',
@@ -47,7 +47,7 @@ export default async function HomePage() {
     })) || []
 
   const testimonials =
-    page?.data.testimonials.map((item) => ({
+    page?.data?.testimonials?.map((item) => ({
       quote: <PrismicRichText field={item.quote} />,
       author: item.author || '',
       position: item.position || '',
@@ -62,26 +62,26 @@ export default async function HomePage() {
               className="mb-6 max-w-[1440px] font-bold leading-tight"
               style={{ fontFamily: 'Space Grotesk', fontSize: '60px' }}
             >
-              <PrismicRichText field={page?.data.hero_title} />
+              <PrismicRichText field={page?.data?.hero_title} />
             </div>
             <div className="lg:max-w-[86%]">
               <div
                 className="mb-8 text-lg"
                 style={{ fontFamily: 'Space Grotesk', fontSize: '20px' }}
               >
-                <PrismicRichText field={page?.data.hero_description} />
+                <PrismicRichText field={page?.data?.hero_description} />
               </div>
             </div>
             <button className="btn-primary font-sm h-[68px] w-[264px] hover:border">
               <p style={{ fontFamily: 'Space Grotesk', fontSize: '20px' }}>
-                {page?.data.hero_button_text}
+                {page?.data?.hero_button_text}
               </p>
             </button>
           </div>
           <div className="relative">
-            {page?.data.hero_image && (
+            {page?.data?.hero_image && (
               <PrismicNextImage
-                field={page.data.hero_image}
+                field={page.data?.hero_image}
                 className="h-full w-full object-contain lg:h-[515px]"
                 priority
               />
@@ -89,7 +89,7 @@ export default async function HomePage() {
           </div>
         </div>
 
-        {(page?.data as any).client_logos &&
+        {page?.data?.client_logos &&
           (page?.data as any).client_logos.length > 0 && (
             <div className="mt-16">
               <AnimatedLogos logos={(page?.data as any).client_logos} />
@@ -108,14 +108,14 @@ export default async function HomePage() {
               fontFamily: 'Space Grotesk',
             }}
           >
-            <PrismicRichText field={page?.data.services_title} />
+            <PrismicRichText field={page?.data?.services_title} />
           </div>
           <div className="my-auto lg:w-[60%] xl:w-[48%]">
             <div
               className="text-center leading-tight md:text-left"
               style={{ fontFamily: 'Space Grotesk', fontSize: '18px' }}
             >
-              <PrismicRichText field={page?.data.services_description} />
+              <PrismicRichText field={page?.data?.services_description} />
             </div>
           </div>
         </div>
@@ -179,27 +179,31 @@ export default async function HomePage() {
         <div className="rounded-[45px] bg-gray-light px-5 py-10 sm:px-8 lg:px-14 lg:py-0">
           <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-12">
             <div className="text-center lg:text-left">
-              <h2 className="mb-4 text-2xl font-bold leading-snug sm:mb-6 sm:text-3xl lg:text-4xl">
-                Let's make things happen
-              </h2>
+              <div className="mb-4 text-2xl font-bold leading-snug sm:mb-6 sm:text-3xl lg:text-4xl">
+                <PrismicRichText field={page?.data?.cta_title} />
+              </div>
 
-              <p className="mb-6 text-sm sm:mb-8 sm:text-base">
-                Contact us today to learn more about how our digital marketing
-                services can help your business grow and succeed online.
-              </p>
+              <div className="mb-6 text-sm sm:mb-8 sm:text-base">
+                <PrismicRichText field={page?.data?.cta_description} />
+              </div>
 
               <div className="flex justify-center lg:justify-start">
-                <button className="btn-primary">Get your free proposal</button>
+                <PrismicLink
+                  field={page?.data?.cta_button_link}
+                  className="btn-primary"
+                >
+                  {page?.data?.cta_button_text || 'Get your free proposal'}
+                </PrismicLink>
               </div>
             </div>
             <div className="flex justify-center lg:justify-end">
-              <Image
-                src="/cta-illustration.png"
-                alt="Let's make things happen"
-                width={359}
-                height={394}
-                className="w-52 object-contain sm:w-64 md:w-72 lg:-my-6 lg:me-20 lg:w-[359px]"
-              />
+              {page?.data?.cta_image && (
+                <PrismicNextImage
+                  field={page.data?.cta_image}
+                  className="w-52 object-contain sm:w-64 md:w-72 lg:-my-6 lg:me-20 lg:w-[359px]"
+                  fallbackAlt=""
+                />
+              )}
             </div>
           </div>
         </div>
@@ -211,21 +215,21 @@ export default async function HomePage() {
             className="section-heading text-4xl lg:text-5xl"
             style={{ fontFamily: 'Space Grotesk', fontSize: '40px' }}
           >
-            <PrismicRichText field={page?.data.case_studies_title} />
+            <PrismicRichText field={page?.data?.case_studies_title} />
           </div>
           <div className="my-auto lg:w-[60%] xl:w-[48%]">
             <div
               className="text-center text-lg md:text-left"
               style={{ fontFamily: 'Space Grotesk', fontSize: '18px' }}
             >
-              <PrismicRichText field={page?.data.case_studies_description} />
+              <PrismicRichText field={page?.data?.case_studies_description} />
             </div>
           </div>
         </div>
 
         <div className="rounded-[45px] bg-dark px-5 py-12 text-white xl:px-10">
           <div className="grid grid-cols-1 gap-5 lg:grid-cols-3 xl:gap-8">
-            {page?.data.case_studies.map((item, index) => (
+            {page?.data?.case_studies?.map((item, index) => (
               <div
                 key={index}
                 className={`border-b border-white pb-8 lg:border-b-0 lg:border-r lg:pb-0 ${index === 2 ? 'border-none' : ''}`}
@@ -265,14 +269,14 @@ export default async function HomePage() {
             className="section-heading text-center text-4xl md:text-left lg:text-5xl"
             style={{ fontFamily: 'Space Grotesk', fontSize: '40px' }}
           >
-            <PrismicRichText field={page?.data.process_title} />
+            <PrismicRichText field={page?.data?.process_title} />
           </div>
           <div className="my-auto lg:w-[35%] xl:w-[25%]">
             <div
               className="text-center text-lg md:text-left"
               style={{ fontFamily: 'Space Grotesk', fontSize: '18px' }}
             >
-              <PrismicRichText field={page?.data.process_description} />
+              <PrismicRichText field={page?.data?.process_description} />
             </div>
           </div>
         </div>
@@ -283,11 +287,11 @@ export default async function HomePage() {
       <section className="container mx-auto px-4 py-16 lg:px-8">
         <div className="mb-12 flex flex-col items-center gap-8 md:flex-row">
           <div className="section-heading text-4xl lg:text-5xl">
-            <PrismicRichText field={page?.data.team_title} />
+            <PrismicRichText field={page?.data?.team_title} />
           </div>
           <div className="my-auto lg:w-[55%] xl:w-[40%]">
             <div className="text-center text-lg md:text-left">
-              <PrismicRichText field={page?.data.team_description} />
+              <PrismicRichText field={page?.data?.team_description} />
             </div>
           </div>
         </div>
@@ -330,11 +334,11 @@ export default async function HomePage() {
       <section className="container mx-auto px-4 py-16 lg:px-8">
         <div className="mb-12 flex flex-col items-center gap-8 md:flex-row">
           <div className="section-heading text-4xl lg:text-5xl">
-            <PrismicRichText field={page?.data.testimonials_title} />
+            <PrismicRichText field={page?.data?.testimonials_title} />
           </div>
           <div className="my-auto lg:w-[50%] xl:w-[40%]">
             <div className="text-center text-lg md:text-left">
-              <PrismicRichText field={page?.data.testimonials_description} />
+              <PrismicRichText field={page?.data?.testimonials_description} />
             </div>
           </div>
         </div>
@@ -348,11 +352,11 @@ export default async function HomePage() {
       >
         <div className="mb-12 flex flex-col items-center gap-8 md:flex-row">
           <div className="section-heading mb-4 text-3xl sm:text-4xl lg:mb-0 lg:text-5xl">
-            <PrismicRichText field={page?.data.contact_title} />
+            <PrismicRichText field={page?.data?.contact_title} />
           </div>
           <div className="my-auto lg:w-[50%] xl:w-[30%]">
             <div className="text-center text-base sm:text-lg md:text-left">
-              <PrismicRichText field={page?.data.contact_description} />
+              <PrismicRichText field={page?.data?.contact_description} />
             </div>
           </div>
         </div>{' '}

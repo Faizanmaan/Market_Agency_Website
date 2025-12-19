@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { createClient } from '@/prismicio'
 import * as prismic from '@prismicio/client'
 import { PrismicNextImage } from '@prismicio/next'
-import { PrismicRichText } from '@prismicio/react'
+import { PrismicRichText, PrismicLink } from '@prismicio/react'
 import { ServicesPageDocument } from '@/prismicio-types'
 
 export default async function ServicesPage() {
@@ -14,7 +14,7 @@ export default async function ServicesPage() {
     .catch(() => null)) as ServicesPageDocument | null
 
   const services =
-    homepage?.data.services.map((item) => {
+    homepage?.data?.services?.map((item) => {
       const bgColor = item.background_color || 'bg-gray-light'
       const isDarkBg =
         bgColor.includes('bg-dark') || bgColor.includes('bg-black')
@@ -29,92 +29,22 @@ export default async function ServicesPage() {
         badgeTextColor: 'text-dark',
         buttonBg: isDarkBg ? 'bg-white' : 'bg-dark',
         buttonTextColor: isDarkBg ? 'text-white' : 'text-dark',
+        whatWeOffer: item.what_we_offer,
+        ctaText: item.cta_text,
+        ctaLink: item.cta_link,
+        benefits: item.benefits,
       }
     }) || []
-  const serviceContent = [
-    {
-      whatWeOffer:
-        'We optimize your website to rank higher in search engine results pages, driving more organic traffic to your site. Our SEO services include keyword research, on-page optimization, technical SEO, and link building strategies.',
-      ctaText: 'Get SEO Audit',
-      ctaLink: '/services/social-media-marketing',
-      benefits: [
-        'Increased organic traffic',
-        'Higher website rankings',
-        'Better user experience',
-        'Increased brand visibility',
-      ],
-    },
-    {
-      whatWeOffer:
-        'Our PPC services help you maximize your advertising budget by creating targeted campaigns that reach the right audience at the right time. We manage campaigns across Google Ads, Bing Ads, and social media platforms.',
-      ctaText: 'Start PPC Campaign',
-      ctaLink: '/services/social-media-marketing',
-      benefits: [
-        'Immediate website traffic',
-        'Highly targeted advertising',
-        'Measurable ROI',
-        'Flexible budgeting options',
-      ],
-    },
-    {
-      whatWeOffer:
-        'We help you build and engage with your audience across various social media platforms. Our services include content creation, community management, paid social advertising, and performance analytics.',
-      ctaText: 'Social Media Strategy',
-      ctaLink: '/services/social-media-marketing',
-      benefits: [
-        'Increased brand awareness',
-        'Better customer engagement',
-        'Higher conversion rates',
-        'Audience insights',
-      ],
-    },
-    {
-      whatWeOffer:
-        'Our email marketing services help you nurture leads and maintain customer relationships through personalized campaigns. We handle everything from strategy development to design, automation, and performance analysis.',
-      ctaText: 'Start Email Campaign',
-      ctaLink: '/services/social-media-marketing',
-      benefits: [
-        'Direct customer communication',
-        'High ROI',
-        'Personalized messaging',
-        'Automated workflows',
-      ],
-    },
-    {
-      whatWeOffer:
-        'We create high-quality, engaging content that resonates with your target audience and helps achieve your business goals. Our content services include blog posts, articles, infographics, videos, and more.',
-      ctaText: 'Content Strategy',
-      ctaLink: '/services/social-media-marketing',
-      benefits: [
-        'Increased audience engagement',
-        'Increased brand authority',
-        'Better search visibility',
-        'Valuable marketing assets',
-      ],
-    },
-    {
-      whatWeOffer:
-        'We help you make data-driven decisions by setting up comprehensive tracking systems and providing actionable insights. Our services include setting up analytics tools, custom dashboards, conversion tracking, and regular reporting.',
-      ctaText: 'Analytics Setup',
-      ctaLink: '/services/social-media-marketing',
-      benefits: [
-        'Data-driven decision making',
-        'Performance tracking',
-        'User behavior insights',
-        'ROI measurement',
-      ],
-    },
-  ]
 
   return (
     <div className="container mx-auto min-h-screen max-w-7xl bg-white">
       <section className="container mx-auto px-4 py-16 lg:px-8 lg:py-20">
         <div className="mx-auto max-w-3xl text-center">
           <h1 className="mb-6 text-5xl font-medium lg:text-6xl">
-            {servicesPage?.data.hero_title || 'Our Services'}
+            {servicesPage?.data?.hero_title || 'Our Services'}
           </h1>
           <p className="lg:wax-w-[55%] text-xl leading-relaxed">
-            {servicesPage?.data.hero_description ||
+            {servicesPage?.data?.hero_description ||
               'At Positivus, we offer a comprehensive range of digital marketing services designed to help your business thrive in the online world. Explore our services below to find the perfect solution for your needs.'}
           </p>
         </div>
@@ -122,31 +52,26 @@ export default async function ServicesPage() {
 
       <div className="container mx-auto space-y-16 px-4 pb-20 lg:px-8">
         {services.map((service, index) => (
-          <ServiceCard
-            key={index}
-            service={service}
-            content={serviceContent[index]}
-            index={index}
-          />
+          <ServiceCard key={index} service={service} index={index} />
         ))}
       </div>
 
       <section className="container mx-auto px-4 py-20 lg:px-8">
         <div className="text-center">
           <h2 className="mb-6 text-4xl font-medium lg:text-4xl">
-            {servicesPage?.data.cta_title ||
+            {servicesPage?.data?.cta_title ||
               'Ready to transform your digital presence?'}
           </h2>
 
           <p className="mx-auto mb-10 text-xl leading-relaxed lg:w-[65%] xl:w-[55%]">
-            {servicesPage?.data.cta_description ||
+            {servicesPage?.data?.cta_description ||
               'Contact us today to discuss your digital marketing needs and discover how our services can help your business grow and succeed online.'}
           </p>
           <Link
             href="/contact"
             className="inline-block rounded-2xl bg-dark px-11 py-5 text-xl font-medium text-white transition-colors hover:bg-gray-800"
           >
-            {servicesPage?.data.cta_button_text || 'Get in touch'}
+            {servicesPage?.data?.cta_button_text || 'Get in touch'}
           </Link>
         </div>
       </section>
@@ -164,22 +89,17 @@ interface ServiceData {
   badgeTextColor: string
   buttonBg: string
   buttonTextColor: string
-}
-
-interface ServiceContent {
-  whatWeOffer: string
-  ctaText: string
-  ctaLink: string
-  benefits: string[]
+  whatWeOffer: prismic.RichTextField
+  ctaText: prismic.KeyTextField
+  ctaLink: prismic.LinkField
+  benefits: prismic.GroupField<{ benefit: prismic.KeyTextField }>
 }
 
 function ServiceCard({
   service,
-  content,
   index,
 }: {
   service: ServiceData
-  content: ServiceContent
   index: number
 }) {
   const isDark = service.bgColor === 'bg-dark'
@@ -247,14 +167,14 @@ function ServiceCard({
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
             <h3 className="mb-6 text-2xl font-medium">What we offer</h3>
-            <p className="mb-8 text-base font-normal leading-relaxed">
-              {content.whatWeOffer}
-            </p>
-            <Link
-              href={content.ctaLink}
+            <div className="mb-8 text-base font-normal leading-relaxed">
+              <PrismicRichText field={service.whatWeOffer} />
+            </div>
+            <PrismicLink
+              field={service.ctaLink}
               className="inline-flex items-center gap-2 rounded-2xl bg-primary px-8 py-4 text-base font-medium text-dark transition-colors hover:bg-primary/90"
             >
-              {content.ctaText}
+              {service.ctaText || 'Learn more'}
               <svg
                 width="20"
                 height="20"
@@ -265,7 +185,7 @@ function ServiceCard({
               >
                 <path d="M5 10h10M10 5l5 5-5 5" />
               </svg>
-            </Link>
+            </PrismicLink>
           </div>
 
           <div
@@ -273,7 +193,7 @@ function ServiceCard({
           >
             <h3 className="mb-6 text-2xl font-medium">Benefits</h3>
             <ul className="space-y-4">
-              {content.benefits.map((benefit: string, index: number) => (
+              {service.benefits?.map((item, index) => (
                 <li key={index} className="my-auto flex items-start gap-3">
                   <div className="my-auto flex h-4 w-4 flex-shrink-0 items-center justify-center rounded-full bg-primary">
                     <svg width="10" height="10" viewBox="0 0 14 14" fill="none">
@@ -286,7 +206,7 @@ function ServiceCard({
                       />
                     </svg>
                   </div>
-                  <span className="text-base font-normal">{benefit}</span>
+                  <span className="text-base font-normal">{item.benefit}</span>
                 </li>
               ))}
             </ul>

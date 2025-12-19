@@ -64,7 +64,7 @@ export default function Footer({ settings }: FooterProps) {
           </div>
 
           <div className="mb-12 grid grid-cols-1 gap-8 lg:grid-cols-2">
-            <div className="space-y-3 lg:max-w-[54%]">
+            <div className="space-y-3">
               <div>
                 <span className="rounded-[7px] bg-primary px-2 text-xl font-medium text-dark">
                   Contact us:
@@ -77,7 +77,8 @@ export default function Footer({ settings }: FooterProps) {
                 Phone: {settings?.data.contact_phone}
               </p>
               <p className="text-lg font-normal">
-                Address: {settings?.data.contact_address}
+                Address: {settings?.data.contact_address} <br />
+                {settings?.data.contact_address2}
               </p>
             </div>
 

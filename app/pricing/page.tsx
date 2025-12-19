@@ -7,7 +7,7 @@ export default async function PricingPage() {
   const page = await client.getSingle('pricing').catch(() => null)
 
   const pricingTiers =
-    page?.data.pricing_tiers?.map((tier) => {
+    page?.data?.pricing_tiers?.map((tier) => {
       const features: string[] = []
 
       if (tier.features && Array.isArray(tier.features)) {
@@ -30,6 +30,8 @@ export default async function PricingPage() {
         price: tier.price || 0,
         features: features,
         isPopular: tier.is_popular || false,
+        priceSuffix: tier.price_suffix,
+        buttonText: tier.button_text,
       }
     }) || []
 
@@ -55,6 +57,8 @@ export default async function PricingPage() {
               price={tier.price}
               features={tier.features}
               isPopular={tier.isPopular}
+              priceSuffix={tier.priceSuffix}
+              buttonText={tier.buttonText}
             />
           ))}
         </div>

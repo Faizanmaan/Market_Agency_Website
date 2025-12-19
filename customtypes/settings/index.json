@@ -108,6 +108,13 @@
         },
         "type": "Text"
       },
+      "contact_address2": {
+        "config": {
+          "label": "Contact Address 2",
+          "placeholder": "Moonstone City, Stardust State 12345"
+        },
+        "type": "Text"
+      },
       "copyright_text": {
         "config": {
           "label": "Copyright Text",

@@ -65,6 +65,20 @@
                 "placeholder_true": "Yes",
                 "default_value": false
               }
+            },
+            "price_suffix": {
+              "type": "Text",
+              "config": {
+                "label": "Price Suffix",
+                "placeholder": "/month"
+              }
+            },
+            "button_text": {
+              "type": "Text",
+              "config": {
+                "label": "Button Text",
+                "placeholder": "Get Started"
+              }
             }
           }
         }

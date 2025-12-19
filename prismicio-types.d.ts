@@ -254,6 +254,21 @@ export type BlogPostDocument<Lang extends string = string> =
   >
 
 /**
+ * Item in *Homepage → Services List → Benefits*
+ */
+export interface HomepageDocumentDataServicesBenefitsItem {
+  /**
+   * Benefit field in *Homepage → Services List → Benefits*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Increased organic traffic
+   * - **API ID Path**: homepage.services[].benefits[].benefit
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  benefit: prismic.KeyTextField
+}
+
+/**
  * Item in *Homepage → Services List*
  */
 export interface HomepageDocumentDataServicesItem {
@@ -323,6 +338,48 @@ export interface HomepageDocumentDataServicesItem {
   title_background_color: prismic.SelectField<
     'bg-primary' | 'bg-white',
     'filled'
+  >
+
+  /**
+   * What we offer field in *Homepage → Services List*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: We optimize your website...
+   * - **API ID Path**: homepage.services[].what_we_offer
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  what_we_offer: prismic.RichTextField
+
+  /**
+   * CTA Text field in *Homepage → Services List*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Get SEO Audit
+   * - **API ID Path**: homepage.services[].cta_text
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  cta_text: prismic.KeyTextField
+
+  /**
+   * CTA Link field in *Homepage → Services List*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: Link to service page...
+   * - **API ID Path**: homepage.services[].cta_link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  cta_link: prismic.LinkField
+
+  /**
+   * Benefits field in *Homepage → Services List*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: homepage.services[].benefits[]
+   * - **Documentation**: https://prismic.io/docs/fields/group
+   */
+  benefits: prismic.GroupField<
+    Simplify<HomepageDocumentDataServicesBenefitsItem>
   >
 }
 
@@ -764,6 +821,61 @@ interface HomepageDocumentData {
    * - **Documentation**: https://prismic.io/docs/fields/image
    */
   contact_image: prismic.ImageField<never>
+
+  /**
+   * CTA Title field in *Homepage*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Let's make things happen
+   * - **API ID Path**: homepage.cta_title
+   * - **Tab**: CTA
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  cta_title: prismic.RichTextField
+
+  /**
+   * CTA Description field in *Homepage*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Contact us today to learn more...
+   * - **API ID Path**: homepage.cta_description
+   * - **Tab**: CTA
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  cta_description: prismic.RichTextField
+
+  /**
+   * CTA Button Text field in *Homepage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Get your free proposal
+   * - **API ID Path**: homepage.cta_button_text
+   * - **Tab**: CTA
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  cta_button_text: prismic.KeyTextField
+
+  /**
+   * CTA Button Link field in *Homepage*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: Link to contact or proposal page
+   * - **API ID Path**: homepage.cta_button_link
+   * - **Tab**: CTA
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  cta_button_link: prismic.LinkField
+
+  /**
+   * CTA Image field in *Homepage*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: homepage.cta_image
+   * - **Tab**: CTA
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  cta_image: prismic.ImageField<never>
 }
 
 /**
@@ -836,6 +948,26 @@ export interface PricingDocumentDataPricingTiersItem {
    * - **Documentation**: https://prismic.io/docs/fields/boolean
    */
   is_popular: prismic.BooleanField
+
+  /**
+   * Price Suffix field in *Pricing → Pricing Tiers*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: /month
+   * - **API ID Path**: pricing.pricing_tiers[].price_suffix
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  price_suffix: prismic.KeyTextField
+
+  /**
+   * Button Text field in *Pricing → Pricing Tiers*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Get Started
+   * - **API ID Path**: pricing.pricing_tiers[].button_text
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  button_text: prismic.KeyTextField
 }
 
 /**
@@ -1141,6 +1273,7 @@ interface SettingsDocumentData {
    * - **Documentation**: https://prismic.io/docs/fields/text
    */
   contact_address: prismic.KeyTextField
+  contact_address2: prismic.KeyTextField
 
   /**
    * Copyright Text field in *Settings*

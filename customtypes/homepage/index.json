@@ -107,6 +107,44 @@
                 "options": ["bg-primary", "bg-white"],
                 "default_value": "bg-primary"
               }
+            },
+            "what_we_offer": {
+              "type": "StructuredText",
+              "config": {
+                "label": "What we offer",
+                "placeholder": "We optimize your website...",
+                "allowTargetBlank": true,
+                "multi": "paragraph"
+              }
+            },
+            "cta_text": {
+              "type": "Text",
+              "config": {
+                "label": "CTA Text",
+                "placeholder": "Get SEO Audit"
+              }
+            },
+            "cta_link": {
+              "type": "Link",
+              "config": {
+                "label": "CTA Link",
+                "placeholder": "Link to service page..."
+              }
+            },
+            "benefits": {
+              "type": "Group",
+              "config": {
+                "label": "Benefits",
+                "fields": {
+                  "benefit": {
+                    "type": "Text",
+                    "config": {
+                      "label": "Benefit",
+                      "placeholder": "Increased organic traffic"
+                    }
+                  }
+                }
+              }
             }
           }
         }
@@ -379,6 +417,48 @@
         "type": "Image",
         "config": {
           "label": "Contact Image",
+          "constraint": {},
+          "thumbnails": []
+        }
+      }
+    },
+    "CTA": {
+      "cta_title": {
+        "type": "StructuredText",
+        "config": {
+          "label": "CTA Title",
+          "placeholder": "Let's make things happen",
+          "allowTargetBlank": true,
+          "single": "heading2"
+        }
+      },
+      "cta_description": {
+        "type": "StructuredText",
+        "config": {
+          "label": "CTA Description",
+          "placeholder": "Contact us today to learn more...",
+          "allowTargetBlank": true,
+          "multi": "paragraph"
+        }
+      },
+      "cta_button_text": {
+        "type": "Text",
+        "config": {
+          "label": "CTA Button Text",
+          "placeholder": "Get your free proposal"
+        }
+      },
+      "cta_button_link": {
+        "type": "Link",
+        "config": {
+          "label": "CTA Button Link",
+          "placeholder": "Link to contact or proposal page"
+        }
+      },
+      "cta_image": {
+        "type": "Image",
+        "config": {
+          "label": "CTA Image",
           "constraint": {},
           "thumbnails": []
         }
