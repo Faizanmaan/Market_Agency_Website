@@ -1,5 +1,8 @@
 {
-  "/page": "app/page.js",
-  "/services/social-media-marketing/page": "app/services/social-media-marketing/page.js",
+  "/services/page": "app/services/page.js",
+  "/blogs/[uid]/page": "app/blogs/[uid]/page.js",
+  "/pricing/page": "app/pricing/page.js",
+  "/blogs/page": "app/blogs/page.js",
+  "/use-cases/page": "app/use-cases/page.js",
   "/icon.png/route": "app/icon.png/route.js"
 }

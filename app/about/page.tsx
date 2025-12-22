@@ -58,10 +58,10 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {page?.data?.client_logos &&
-        page.data.client_logos.length > 0 && (
-          <div className="mt-16">
-            <AnimatedLogos logos={page.data.client_logos} />
+      {(page?.data as any).client_logos &&
+        (page?.data as any).client_logos.length > 0 && (
+          <div className="container mx-auto px-4 lg:px-8">
+            <AnimatedLogos logos={(page?.data as any).client_logos} />
           </div>
         )}
 
@@ -139,7 +139,7 @@ export default async function AboutPage() {
               className={` ${service.bgColor} ${service.border} ${service.textColor || 'text-dark'} flex h-full w-full flex-col gap-6 overflow-hidden rounded-[45px] border-2 border-b-8 p-6 transition-all hover:shadow-lg md:flex-row md:gap-8 md:p-8`}
             >
               <div className="flex h-full flex-1 flex-col justify-between">
-                <div className="flex flex-col items-center md:items-start lg:mb-20">
+                <div className="flex flex-col items-center md:items-start lg:mb-20 text-black">
                   <h3
                     className={`inline-block text-2xl font-semibold xl:text-3xl ${service.titleBgColor} rounded-[7px] px-2 py-1`}
                   >

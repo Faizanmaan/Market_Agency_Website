@@ -816,6 +816,9 @@ body{
 .ms-9{
   margin-inline-start: 2.25rem;
 }
+.ms-\[2px\]{
+  margin-inline-start: 2px;
+}
 .mt-0\.5{
   margin-top: 0.125rem;
 }
@@ -842,15 +845,6 @@ body{
 }
 .mt-auto{
   margin-top: auto;
-}
-.ms-1{
-  margin-inline-start: 0.25rem;
-}
-.ms-\[1px\]{
-  margin-inline-start: 1px;
-}
-.ms-\[2px\]{
-  margin-inline-start: 2px;
 }
 .line-clamp-2{
   overflow: hidden;
