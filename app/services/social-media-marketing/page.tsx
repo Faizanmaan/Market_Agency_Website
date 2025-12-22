@@ -54,8 +54,8 @@ export default async function SocialMediaMarketingPage() {
           <div className="overflow-hidden">
             <div className="w-full rounded-lg bg-primary py-3">
               <div className="flex items-center gap-5 whitespace-nowrap px-8 text-xs font-bold tracking-widest text-dark lg:ml-[250px]">
-                {(page.data as any).banner_items && (page.data as any).banner_items.length > 0 && (
-                  (page.data as any).banner_items.map((item: any, index: number) => (
+                {page.data.banner_items && page.data.banner_items.length > 0 && (
+                  page.data.banner_items.map((item, index) => (
                     <span key={index} className="flex items-center">
                       <span>{item.item_text}</span>
                       <Image

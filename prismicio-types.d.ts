@@ -1450,6 +1450,21 @@ export interface SocialMediaMarketingDocumentDataClientLogosItem {
 }
 
 /**
+ * Item in *Social Media Marketing → Banner Items*
+ */
+export interface SocialMediaMarketingDocumentDataBannerItemsItem {
+  /**
+   * Item Text field in *Social Media Marketing → Banner Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: SERVICES
+   * - **API ID Path**: social_media_marketing.banner_items[].item_text
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  item_text: prismic.KeyTextField
+}
+
+/**
  * Content for Social Media Marketing documents
  */
 interface SocialMediaMarketingDocumentData {
@@ -1719,6 +1734,19 @@ interface SocialMediaMarketingDocumentData {
    */
   client_logos: prismic.GroupField<
     Simplify<SocialMediaMarketingDocumentDataClientLogosItem>
+  >
+
+  /**
+   * Banner Items field in *Social Media Marketing*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: social_media_marketing.banner_items[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  banner_items: prismic.GroupField<
+    Simplify<SocialMediaMarketingDocumentDataBannerItemsItem>
   >
 }
 
