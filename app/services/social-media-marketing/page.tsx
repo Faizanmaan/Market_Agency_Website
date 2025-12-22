@@ -53,31 +53,21 @@ export default async function SocialMediaMarketingPage() {
         <section className="container mx-auto max-w-7xl px-4 py-12 lg:px-8">
           <div className="overflow-hidden">
             <div className="w-full rounded-lg bg-primary py-3">
-              <div className="flex items-center gap-4 whitespace-nowrap px-8 text-xs font-bold tracking-widest text-dark lg:ml-[250px]">
-                <span>SERVICES</span>
-                <Image
-                  src="/separator-icon.png"
-                  alt=""
-                  width={12}
-                  height={12}
-                  className="inline-block"
-                />
-                <span>CASE STUDIES</span>
-                <Image
-                  src="/separator-icon.png"
-                  alt=""
-                  width={12}
-                  height={12}
-                  className="inline-block"
-                />
-                <span>CLIENTS</span>
-                <Image
-                  src="/separator-icon.png"
-                  alt=""
-                  width={12}
-                  height={12}
-                  className="inline-block"
-                />
+              <div className="flex items-center gap-5 whitespace-nowrap px-8 text-xs font-bold tracking-widest text-dark lg:ml-[250px]">
+                {(page.data as any).banner_items && (page.data as any).banner_items.length > 0 && (
+                  (page.data as any).banner_items.map((item: any, index: number) => (
+                    <span key={index} className="flex items-center">
+                      <span>{item.item_text}</span>
+                      <Image
+                        src="/separator-icon.png"
+                        alt=""
+                        width={10}
+                        height={12}
+                        className="inline-block ms-[2px]"
+                      />
+                    </span>
+                  ))
+                )}
               </div>
             </div>
 
@@ -228,7 +218,7 @@ export default async function SocialMediaMarketingPage() {
             </section>
           ))}
 
-        {(page.data as any).partner_logo?.url && (
+        {page.data.partner_logo?.url && (
           <section className="container mx-auto px-4 py-12 lg:max-w-[80%] lg:px-8">
             <div className="relative flex flex-col items-center justify-between gap-8 overflow-hidden rounded-[30px] bg-dark p-8 lg:flex-row lg:p-12">
               <div className="absolute bottom-0 left-0 top-0 z-0 grid w-24 grid-cols-6 gap-2 opacity-30">
@@ -268,9 +258,9 @@ export default async function SocialMediaMarketingPage() {
                   field={page.data.partner_link}
                   className="flex items-center gap-6"
                 >
-                  {(page.data as any).partner_logo?.url && (
+                  {page.data.partner_logo?.url && (
                     <PrismicImage
-                      field={(page.data as any).partner_logo}
+                      field={page.data.partner_logo}
                       className="h-[72px] w-[101px] object-contain px-4"
                     />
                   )}
@@ -375,9 +365,9 @@ export default async function SocialMediaMarketingPage() {
                   className="overflow-hidden rounded-xl bg-white shadow-sm"
                 >
                   <div className="relative h-[184px] w-full overflow-hidden">
-                    {(study as any).case_study_image?.url ? (
+                    {study.case_study_image?.url ? (
                       <PrismicImage
-                        field={(study as any).case_study_image}
+                        field={study.case_study_image}
                         className="h-full w-full object-cover"
                       />
                     ) : null}

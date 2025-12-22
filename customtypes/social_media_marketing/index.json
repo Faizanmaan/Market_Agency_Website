@@ -68,6 +68,21 @@
           "single": "heading2"
         }
       },
+      "banner_items": {
+        "type": "Group",
+        "config": {
+          "label": "Banner Items",
+          "fields": {
+            "item_text": {
+              "type": "Text",
+              "config": {
+                "label": "Item Text",
+                "placeholder": "SERVICES"
+              }
+            }
+          }
+        }
+      },
       "service_icons": {
         "type": "Group",
         "config": {

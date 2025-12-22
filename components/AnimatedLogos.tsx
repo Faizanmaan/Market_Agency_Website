@@ -1,15 +1,15 @@
 'use client'
 
 import { PrismicNextImage } from '@prismicio/next'
-import { ImageField } from '@prismicio/client'
+import { ImageField, KeyTextField } from '@prismicio/client'
 
-interface Logo {
-  logo: ImageField
-  client_name?: string
+interface ClientLogo {
+  logo: ImageField<never>
+  client_name: KeyTextField
 }
 
 interface AnimatedLogosProps {
-  logos: Logo[]
+  logos: ClientLogo[]
 }
 
 export default function AnimatedLogos({ logos }: AnimatedLogosProps) {
@@ -40,7 +40,7 @@ export default function AnimatedLogos({ logos }: AnimatedLogosProps) {
         }
       `}</style>
       <div className="scroll-container items-center gap-6">
-        {tripleLogos.map((client: Logo, index: number) =>
+        {tripleLogos.map((client: ClientLogo, index: number) =>
           client.logo?.url ? (
             <div
               key={`logo-${index}`}

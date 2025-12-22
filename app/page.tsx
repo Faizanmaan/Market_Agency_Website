@@ -90,9 +90,9 @@ export default async function HomePage() {
         </div>
 
         {page?.data?.client_logos &&
-          (page?.data as any).client_logos.length > 0 && (
+          page.data.client_logos.length > 0 && (
             <div className="mt-16">
-              <AnimatedLogos logos={(page?.data as any).client_logos} />
+              <AnimatedLogos logos={page.data.client_logos} />
             </div>
           )}
       </section>

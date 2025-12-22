@@ -58,10 +58,10 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {(page?.data as any).client_logos &&
-        (page?.data as any).client_logos.length > 0 && (
-          <div className="container mx-auto px-4 lg:px-8">
-            <AnimatedLogos logos={(page?.data as any).client_logos} />
+      {page?.data?.client_logos &&
+        page.data.client_logos.length > 0 && (
+          <div className="mt-16">
+            <AnimatedLogos logos={page.data.client_logos} />
           </div>
         )}
 
